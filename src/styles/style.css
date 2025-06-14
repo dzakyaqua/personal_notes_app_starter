@@ -25,9 +25,9 @@
   box-sizing: border-box;
 }
 
-a {
+/* a {
   color: var(--on-background);
-}
+} */
 
 
 body {
@@ -65,6 +65,22 @@ main {
   width: 90%;
   max-width: 1200px;
 }
+
+.note-app_header h1 {
+  font-size: 28px;
+  margin: 0;
+  color: var(--background);
+}
+
+.note-app_header h1 a {
+  color: var(--background);
+  text-decoration: none;
+}
+
+.note-app_header h1 a:hover {
+  color: var(--primary  );
+}
+
 
 .notes-list {
   margin-top: 32px;
@@ -193,16 +209,26 @@ main {
   margin: 16px 0;
   font-family: 'Inter', sans-serif;
   background-color: transparent;
-  border: 1px solid var(--on-background);
-  border-radius: 4px;
-  padding: 8px;
+  border: 1px solid var(--background);
+  border-radius: 8px; 
+  padding: 10px 12px; 
   width: 100%;
   color: var(--on-background);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search-bar input:focus {
+  border-color: var(--primary); 
+  box-shadow: 0 0 0 2px var(--primary); 
 }
 
 .search-bar input::placeholder {
   color: var(--on-background-grey);
+  opacity: 0.8; 
 }
+
 
 .toggle-theme, .toggle-locale {
   background-color: transparent;

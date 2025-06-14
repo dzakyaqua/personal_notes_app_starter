@@ -49,16 +49,21 @@ class HomePage extends React.Component {
   }
  
   render() {
+    // const dailies = this.state.dailies.filter((Daily) => {
+    //   return Daily.name.toLowerCase().includes(
+    //     this.state.keyword.toLowerCase()
+    //   );
+    // });
+
     const dailies = this.state.dailies.filter((Daily) => {
-      return Daily.name.toLowerCase().includes(
-        this.state.keyword.toLowerCase()
-      );
+      return Daily?.name?.toLowerCase().includes(this.state.keyword.toLowerCase());
     });
+
 
     return (
       <section>
-        <SearchBar keyword={this.state.keyword} keywordChange={this.onKeywordChangeHandler} />
         <h2>Daftar </h2>
+        <SearchBar keyword={this.state.keyword} keywordChange={this.onKeywordChangeHandler} />
         <DailyList dailies={dailies} onDelete={this.onDeleteHandler} />      
       </section>
     )
