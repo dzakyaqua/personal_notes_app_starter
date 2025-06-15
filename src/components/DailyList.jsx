@@ -5,27 +5,28 @@ import PropTypes from 'prop-types';
 
 
 
-function DailyList({ dailies }) {
+function DailyList({ dailies, onDelete }) {
   return (
     <section className={dailies.length > 0 ? 'notes-list' : 'notes-list-empty'}>
       {dailies.length > 0 ? (
-        dailies.map((daily) => <DailyItem key={daily.id} {...daily} />)
+        dailies.map((daily) => <DailyItem key={daily.id} {...daily} onDelete={onDelete} />)
       ) : (
-        <EmptyList />
+        <EmptyList /> 
       )}
     </section>
   );
 } 
 
 DailyList.propTypes = {
-  dailys: PropTypes.arrayOf(
+  dailies: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       createdAt: PropTypes.string.isRequired,
       body: PropTypes.string
     })
-  ).isRequired
+  ).isRequired,
+  onDelete: PropTypes.func.isRequired,
 }
 export default DailyList;
 

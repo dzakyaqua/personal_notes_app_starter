@@ -8,27 +8,48 @@ class DailyInput extends React.Component {
 
     // inisialisasi state
     this.state = {
-      name: '',
-      tag: '',
-    }
+      id: '',
+      title: '',
+      body: '',
+      archived: false,
+      createdAt: '',
+    };
 
-    this.onNameChangeEventHandler = this.onNameChangeEventHandler.bind(this);
-    this.onTagChangeEventHandler = this.onTagChangeEventHandler.bind(this);
+
+    this.onTitleChangeEventHandler = this.onTitleChangeEventHandler.bind(this);
+    this.onBodyChangeEventHandler = this.onBodyChangeEventHandler.bind(this);
+    this.onArchivedChangeEventHandler = this.onArchivedChangeEventHandler.bind(this);
+    this.onCreatedAtChangeEventHandler = this.onCreatedAtChangeEventHandler.bind(this);
     this.onSubmitEventHandler = this.onSubmitEventHandler.bind(this);
+
   }
 
-  onNameChangeEventHandler(event) {
+  onTitleChangeEventHandler(event) {
     this.setState(() => {
       return {
-        name: event.target.value,
+        title: event.target.value,
       }
     });
   }
 
-  onTagChangeEventHandler(event) {
+  onBodyChangeEventHandler(event) {
     this.setState(() => {
       return {
-        tag: event.target.value,
+        body: event.target.value,
+      }
+    });
+  }
+  onArchivedChangeEventHandler(event) {
+    this.setState(() => {
+      return {
+        archived: event.target.value,
+      }
+    });
+  }
+  onCreatedAtChangeEventHandler(event) {
+    this.setState(() => {
+      return {
+        createdAt: event.target.value,
       }
     });
   }
@@ -41,17 +62,22 @@ class DailyInput extends React.Component {
   render() {
    return (
      <form className='note-input' onSubmit={this.onSubmitEventHandler}>
-       <input type="text" placeholder="Nama" value={this.state.name} onChange={this.onNameChangeEventHandler} />
-       <input type="text" placeholder="Tag" value={this.state.tag} onChange={this.onTagChangeEventHandler} />
-       <button type="submit">Tambah</button>
-     </form>
+      <input type="text" placeholder="Judul" value={this.state.title} onChange={this.onTitleChangeEventHandler} />
+      <textarea placeholder="Isi catatan" value={this.state.body} onChange={this.onBodyChangeEventHandler}></textarea>
+      <select value={this.state.archived} onChange={this.onArchivedChangeEventHandler}>
+        <option value={false}>Aktif</option>
+        <option value={true}>Arsip</option>
+      </select>
+      <input type="datetime-local" value={this.state.createdAt} onChange={this.onCreatedAtChangeEventHandler} />
+      <button type="submit">Tambah</button>
+    </form>
    )
  }
  
 }
 
 DailyInput.propTypes = {
- addDaily: PropTypes.func.isRequired,
+ addNote: PropTypes.func.isRequired,
 }
 
 export default DailyInput;

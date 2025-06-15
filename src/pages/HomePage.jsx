@@ -2,8 +2,8 @@ import React from 'react';
 import DailyList from '../components/DailyList';
 import SearchBar from '../components/SearchBar';
 import { deleteNote, getAllNotes } from '../utils/local-data';
-import { useSearchParams } from 'react-router-dom';
-
+import { useSearchParams, Link } from 'react-router-dom';
+import { IoAddCircle   } from "react-icons/io5";
 
 function HomePageWrapper() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -56,13 +56,18 @@ class HomePage extends React.Component {
     // });
 
     const dailies = this.state.dailies.filter((Daily) => {
-      return Daily?.name?.toLowerCase().includes(this.state.keyword.toLowerCase());
+      return Daily?.title?.toLowerCase().includes(this.state.keyword.toLowerCase());
     });
 
 
     return (
       <section>
-        <h2>Daftar </h2>
+        <div className="daftar">
+          <h2 className='daftar_item' >Daftar</h2>
+          <Link to="/notes/new" className='daftar-item__add'>
+            <IoAddCircle />
+          </Link>
+        </div>
         <SearchBar keyword={this.state.keyword} keywordChange={this.onKeywordChangeHandler} />
         <DailyList dailies={dailies} onDelete={this.onDeleteHandler} />      
       </section>

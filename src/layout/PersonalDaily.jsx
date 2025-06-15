@@ -1,6 +1,8 @@
 import React from 'react';
 import { Route, Routes, Link } from 'react-router-dom';
 import HomePage from '../pages/HomePage';
+import DailyDetail from '../pages/DailyDetail';
+import AddPage from '../pages/AddPage'; 
 
 function PersonalDaily() {
   return (
@@ -13,6 +15,8 @@ function PersonalDaily() {
       <main>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/notes/:id" element={<DailyDetail />} />
+          <Route path="/notes/new" element={<AddPage />} />
         </Routes>
       </main>
     </div>
