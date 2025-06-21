@@ -1,5 +1,5 @@
 import React from 'react';
-import { addNote } from '../utils/local-data';
+import { addNote } from '../utils/network-data';
 import DailyInput from '../components/DailyInput';
 import { useNavigate } from 'react-router-dom';
  

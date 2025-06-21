@@ -1,13 +1,15 @@
 import React from 'react';
 import DailyList from '../components/DailyList';
 import SearchBar from '../components/SearchBar';
-import { deleteNote, getAllNotes } from '../utils/local-data';
+// import { deleteNote, getAllNotes } from '../utils/local-data';
+import { deleteNote, getActiveNotes } from '../utils/network-data';
 import { useSearchParams, Link } from 'react-router-dom';
 import { IoAddCircle   } from "react-icons/io5";
 
 function HomePageWrapper() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const keyword = searchParams.get('keyword');
+  const keyword = searchParams.get('keyword') || '';
+
   function changeSearchParams(keyword) {
     setSearchParams({ keyword });
   }
@@ -20,23 +22,32 @@ class HomePage extends React.Component {
     super(props);
 
      this.state = {
-      dailies : getAllNotes(),
+      dailies : [],
       keyword: props.defaultKeyword || '',
+      initializing: true,
     }
  
     this.onDeleteHandler = this.onDeleteHandler.bind(this);
     this.onKeywordChangeHandler = this.onKeywordChangeHandler.bind(this);
   }
  
-  onDeleteHandler(id) {
-    deleteNote(id);
- 
-    // update the contact state from data.js
-    this.setState(() => {
-      return {
-        dailies : getAllNotes(),
-      }
-    });
+   async componentDidMount() {
+    const result = await getActiveNotes();
+    if (!result.error) {
+      this.setState({
+        dailies: result.data,
+        initializing: false,
+      });
+    }
+  }
+
+  // ✅ Diubah: delete dan ambil data terbaru dari API
+  async onDeleteHandler(id) {
+    await deleteNote(id);
+    const result = await getActiveNotes();
+    if (!result.error) {
+      this.setState({ dailies: result.data });
+    }
   }
 
   onKeywordChangeHandler(keyword) {
@@ -49,14 +60,9 @@ class HomePage extends React.Component {
   }
  
   render() {
-    // const dailies = this.state.dailies.filter((Daily) => {
-    //   return Daily.name.toLowerCase().includes(
-    //     this.state.keyword.toLowerCase()
-    //   );
-    // });
-
-    const dailies = this.state.dailies.filter((Daily) => {
-      return Daily?.title?.toLowerCase().includes(this.state.keyword.toLowerCase());
+    
+    const dailies = this.state.dailies.filter((Note) => {
+      return Note?.title?.toLowerCase().includes(this.state.keyword.toLowerCase());
     });
 
 

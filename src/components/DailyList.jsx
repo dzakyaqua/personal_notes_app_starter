@@ -3,8 +3,6 @@ import DailyItem from './DailyItem';
 import EmptyList from './EmptyList';
 import PropTypes from 'prop-types';
 
-
-
 function DailyList({ dailies, onDelete }) {
   return (
     <section className={dailies.length > 0 ? 'notes-list' : 'notes-list-empty'}>
