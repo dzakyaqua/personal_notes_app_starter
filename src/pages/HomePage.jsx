@@ -41,7 +41,6 @@ class HomePage extends React.Component {
     }
   }
 
-  // ✅ Diubah: delete dan ambil data terbaru dari API
   async onDeleteHandler(id) {
     await deleteNote(id);
     const result = await getActiveNotes();

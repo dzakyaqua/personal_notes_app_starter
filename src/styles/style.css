@@ -6,6 +6,7 @@
   --surface: #121212;
   --error: #CF6679;
   --warning: #F39C12;
+  --warning-variant: #F1C40F;
   --on-background: #FFFFFF;
   --on-background-grey: #c7c7c7;
   --on-surface: #FFFFFF;
@@ -13,8 +14,8 @@
 
 [data-theme="light"] {
   --background: #DDDDDD;
-  --suface: #FFFFFF;
-  --on-background: #333333;
+  --surface: #FFFFFF;
+  --on-background:  #121212;
   --on-background-grey: #6d6d6d;
   --on-surface: #333333;
 }
@@ -25,20 +26,8 @@
   box-sizing: border-box;
 }
 
-/* a {
-  color: var(--on-background);
-} */
-
-
 body {
   font-family: 'Inter', sans-serif;
-}
-
-.app-container {
-  color: var(--on-background);
-  background-color: var(--background);
-  min-height: 100vh;
-  transition: all ease-in-out 0.5s;
 }
 
 header {
@@ -66,10 +55,38 @@ main {
   max-width: 1200px;
 }
 
+
+/* toggle-theme-button header */
+.toggle-theme-button {
+  font-size: 32px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: var(--primary); /* default dari :root */
+}
+
+.toggle-theme-button:hover {
+  color: var(--primary-variant);
+}
+
+[data-theme="light"] .toggle-theme-button {
+  color: var(--warning); /* kuning */
+}
+/* close tag toggle-theme-button */
+
+/* note-app header */
 .note-app_header h1 {
   font-size: 28px;
   margin: 0;
-  color: var(--background);
+  color: var(--on-background);
+}
+[data-theme="light"] .note-app_header h1 a {
+  color: var(--on-background); 
+}
+[data-theme="light"] .note-app_header h1 a:hover {
+  color: var(--warning); 
 }
 
 .note-app_header h1 a {
@@ -80,7 +97,9 @@ main {
 .note-app_header h1 a:hover {
   color: var(--primary  );
 }
+/* close tag note-app header */
 
+/* notes-list-empty header */
 .notes-list {
   margin-top: 32px;
   display: grid;
@@ -88,7 +107,6 @@ main {
   gap: 16px;
   padding: 16px 8px;
 }
-
 .notes-list-empty {
   margin-top: 32px;
   padding: 16px 8px;
@@ -98,6 +116,10 @@ main {
   text-align: center;
   color: var(--on-background-grey);
 }
+/* close tag notes-list-empty */
+
+/* no-item header */
+
 .note-item {
   background-color: var(--on-background-grey);
   color: var(--on-background);
@@ -107,11 +129,6 @@ main {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   /* transition: transform 0.2s ease, box-shadow 0.2s ease; */
 }
-
-/* .note-item:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-} */
 
 .note-item__title {
   font-size: 20px;
@@ -145,87 +162,9 @@ main {
   line-height: 1.5;
 }
 
+/* close tag note-item */
 
-.detail-page {
-  margin: 0 auto;
-  margin-top: 32px; 
-  width: 90%;
-}
-
-.detail-page__title {
-  font-size: 48px;
-  margin-bottom: 8px;
-  word-wrap: break-word;
-}
-
-.detail-page__createdAt {
-  color: var(--on-background-grey)
-}
-
-.detail-page__body {
-  line-height: 1.5;
-  margin-top: 36px;
-  font-size: 18px;
-}
-
-.detail-page__action, .homepage__action, .add-new-page__action {
-  position: fixed;
-  display: flex;
-  gap: 16px;
-  bottom: 32px;
-  right: 32px;
-}
-
-.action {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 32px;
-  border: 0;
-  width: 50px;
-  height: 50px;
-  border-radius: 50px;
-  background-color: var(--on-background);
-  color: var(--background);
-  padding: 8px;
-  cursor: pointer;
-}
-
-.add-new-page__input {
-  margin-top: 32px;
-}
-
-.add-new-page__input .add-new-page__input__title {
-  width: 100%;
-  background-color: transparent;
-  border: 0;
-  color: var(--on-background);
-  font-family: 'Inter', sans-serif;
-  font-size: 64px;
-  font-weight: bold;
-  padding: 8px 0;
-}
-
-.add-new-page__input__title::placeholder {
-  color: var(--on-background-grey);
-}
-
-.add-new-page__input .add-new-page__input__body {
-  width: 100%;
-  background-color: transparent;
-  border: 0;
-  color: var(--on-background);
-  font-family: 'Inter', sans-serif;
-  font-size: 24px;
-  padding: 8px 0;
-  min-height: 500px;
-}
-
-[data-placeholder]:empty::before {
-  content: attr(data-placeholder);
-  color: var(--on-background-grey)
-}
-
+/* search-bar header */
 .search-bar input {
   margin: 16px 0;
   font-family: 'Inter', sans-serif;
@@ -239,85 +178,29 @@ main {
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
+[data-theme="light"] .search-bar input {
+  border-color: var(--warning); 
+  color: var(--on-background-grey);
+}
 
 .search-bar input:focus {
   border-color: var(--primary); 
   box-shadow: 0 0 0 2px var(--primary); 
 }
+[data-theme="light"] .search-bar input:focus {
+  border-color: var(--warning); 
+  box-shadow: 0 0 0 2px var(--warning); 
+}
+
 
 .search-bar input::placeholder {
   color: var(--on-background-grey);
   opacity: 0.8; 
 }
 
+/* close tag search-bar */
 
-.toggle-theme, .toggle-locale {
-  background-color: transparent;
-  border: 0;
-  cursor: pointer;
-  color: var(--on-background);
-  display: flex;
-  align-items: center;
-  margin: 0 16px;
-}
-
-.toggle-theme {
-  font-size: 36px;
-}
-
-.toggle-locale {
-  font-size: 28px;
-}
-
-.input-login, .input-register {
-  margin: 32px 0;
-}
-
-.input-login label, .input-register label {
-  font-size: 24px;
-  font-weight: lighter;
-}
-
-.input-login input, .input-register input {
-  font-size: 18px;
-  font-family: 'Inter', sans-serif;
-  margin-top: 8px;
-  margin-bottom: 16px;
-  display: block;
-  width: 100%;
-  padding: 8px;
-  background-color: transparent;
-  border-radius: 8px;
-  border: 3px solid var(--on-background);
-  color: var(--on-background)
-}
-
-.input-login button, .input-register button {
-  font-family: 'Inter', sans-serif;
-  font-weight: bold;
-  font-size: 24px;
-  width: 100%;
-  padding: 12px;
-  border: 0;
-  border-radius: 8px;
-  background-color: var(--on-background);
-  color: var(--background);
-  cursor: pointer;
-}
-
-.button-logout {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background-color: transparent;
-  border: 0;
-  font-size: 28px;
-  cursor: pointer;
-  color: var(--on-background);
-}
-
-/* custom css */
-
+/* login-page header */
 .login-page {
   max-width: 400px;
   margin: 80px auto;
@@ -333,6 +216,10 @@ main {
   text-align: center;
   margin-bottom: 24px;
   color: var(--primary, #6200ea);
+}
+
+[data-theme="light"] .login-page h2  {
+  color: var(--warning); 
 }
 
 .login-form {
@@ -365,11 +252,19 @@ main {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+[data-theme="light"] .login-page button   {
+  background-color: var(--warning); 
+}
 
 .login-form button:hover {
   background-color: var(--primary-variant, #3700b3);
 }
+[data-theme="light"] .login-page button:hover   {
+  background-color: var(--warning-variant, #f1c40f); 
+}
+/* close login-page */
 
+/* error-message header */
 .error-message {
   color: #e53935;
   font-size: 14px;
@@ -387,12 +282,15 @@ main {
   text-decoration: none;
   font-weight: 600;
 }
+[data-theme="light"] .login-page a   {
+  color: var(--warning); 
+}
 
 .login-page a:hover {
   text-decoration: underline;
 }
 
-
+/* register-page header */
 .register-page {
   max-width: 400px;
   margin: 80px auto;
@@ -461,6 +359,8 @@ main {
   text-decoration: underline;
 }
 
+/* close tag register-page */
+
 .success-message {
   color: green;
   font-size: 14px;
@@ -471,6 +371,7 @@ main {
   font-size: 14px;
 }
 
+/* note-item__delet header */
 .note-item__delete {
   background-color: transparent;
   border: none;
@@ -488,7 +389,9 @@ main {
   background-color: rgba(229, 57, 53, 0.1); 
 }
 
+/* close tag note-item-delete */
 
+/* note-detail header */
 .note-detail {
   max-width: 800px;
   margin: 40px auto;
@@ -516,8 +419,9 @@ main {
   color: #888;
   margin-bottom: 20px;
 }
+/* close tag note-detail */
 
-
+/* daftar header */
 .daftar {
   display: flex;
   align-items: center;
@@ -541,12 +445,21 @@ main {
   color: #6200ea;
   transition: transform 0.2s ease, color 0.2s ease;
 }
+[data-theme="light"] .daftar-item__add {
+  color: var(--warning); 
+}
 
 .daftar-item__add:hover {
   color: #3700b3;
   transform: scale(1.2);
 }
+[data-theme="light"] .daftar-item__add:hover {
+  color: var(--warning-variant); 
+}
 
+/* close tag daftar */
+
+/* note-input header */
 .note-input {
   display: flex;
   flex-direction: column;
@@ -584,10 +497,19 @@ main {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+[data-theme="light"] .note-input button {
+  background-color: var(--warning); 
+}
 
 .note-input button:hover {
   background-color: #3700b3;
 }
+[data-theme="light"] .note-input button:hover {
+  background-color: var(--warning-variant); 
+}
+/* close tag note-input */
+
+/* logout-button header */
 
 .logout-button {
   display: flex;
@@ -603,18 +525,24 @@ main {
   transition: all 0.3s ease;
   font-weight: 600;
 }
+[data-theme="light"] .logout-button {
+  border-color: var(--warning); 
+  color: var(--warning); 
+}
 
 .logout-button:hover {
   background-color: var(--primary, #6200ea);
   color: #fff;
 }
+[data-theme="light"] .logout-button:hover {
+  background-color: var(--warning); 
+  
+}
 
 .logout-button svg {
   font-size: 20px;
 }
-
-/* custom css */
-
+/* close tag logout-button */
 
 @media screen and (min-width: 650px) {
   .notes-list {
