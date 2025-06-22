@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState,useContext  } from 'react';
 import { useNavigate,Link } from 'react-router-dom';
 import useInput from '../hooks/useInput'; 
 import { login } from '../utils/network-data'; 
+import AuthContext from '../context/AuthContext';
 
 function LoginPage() {
   const [email, onEmailChange] = useInput('');
@@ -9,15 +10,17 @@ function LoginPage() {
   const [errorMsg, setErrorMsg] = useState('');
   const navigate = useNavigate();
 
+  const { loginSuccess } = useContext(AuthContext);
+
   const onSubmitHandler = async (event) => {
     event.preventDefault();
     const response = await login({ email, password });
 
     if (!response.error) {
-      localStorage.setItem('accessToken', response.data.accessToken);
+      await loginSuccess(response.data.accessToken);
       navigate('/'); // redirect ke homepage
     } else {
-      setErrorMsg(response.message);
+      setErrorMsg(response.message || 'Login gagal');
     }
   };
 

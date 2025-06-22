@@ -307,6 +307,9 @@ main {
   margin-bottom: 24px;
   color: var(--primary, #6200ea);
 }
+[data-theme="light"] .register-page h2  {
+  color: var(--warning); 
+}
 
 .register-form {
   display: flex;
@@ -338,9 +341,15 @@ main {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+[data-theme="light"] .register-form button {
+  background-color: var(--warning); 
+} 
 
 .register-form button:hover {
   background-color: var(--primary-variant, #3700b3);
+}
+[data-theme="light"] .register-form button:hover {
+  background-color: var(--warning-variant, #f1c40f); 
 }
 
 .register-page p {
@@ -353,6 +362,9 @@ main {
   color: var(--primary, #6200ea);
   text-decoration: none;
   font-weight: 600;
+}
+[data-theme="light"] .register-page a {
+  color: var(--warning); 
 }
 
 .register-page a:hover {
@@ -543,6 +555,24 @@ main {
   font-size: 20px;
 }
 /* close tag logout-button */
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--primary); /* gunakan warna tema utama */
+  color: var(--on-background);      /* pastikan kontras */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: uppercase;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  cursor: default;
+  transition: background-color 0.3s ease;
+}
+
 
 @media screen and (min-width: 650px) {
   .notes-list {

@@ -10,17 +10,24 @@ import LoginPage from '../pages/loginPage';
 import RegisterPage from '../pages/registerPage';
 import RequireAuth from '../components/RequireAuth';
 import ThemeContext from '../context/themeContext';
+import AuthContext from '../context/AuthContext';
 
 function PersonalDaily() {
   const navigate = useNavigate();
+  
+  const { theme, toggleTheme } = useContext(ThemeContext);
+  const { authedUser, logout } = useContext(AuthContext);
+
+  const getInitials = (name) => {
+    return name?.split(' ').map(n => n[0]).join('').toUpperCase();
+  };
 
   const onLogout = () => {
     localStorage.removeItem('accessToken');
     navigate('/login');
   };
 
-  const isLoggedIn = !!localStorage.getItem('accessToken');
-  const { theme, toggleTheme } = useContext(ThemeContext);
+
 
   return (
     <div className="note-app">
@@ -31,12 +38,17 @@ function PersonalDaily() {
         <button onClick={toggleTheme} className="toggle-theme-button">
         {theme === 'light' ? <FaRegSun />:<FaRegMoon /> }
         </button>
-        {isLoggedIn && (
-          <button onClick={onLogout} className="logout-button">
-            <GiExitDoor />
-            Logout
-          </button>
-        )}
+        {authedUser && (
+            <>
+              <div className="user-avatar" title={authedUser.name}>
+                {getInitials(authedUser.name)}
+              </div>
+              <button onClick={onLogout} className="logout-button">
+                <GiExitDoor />
+                Logout
+              </button>
+            </>
+          )}
       </header>
       <main>
         <Routes>
