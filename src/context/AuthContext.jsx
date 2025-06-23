@@ -8,17 +8,23 @@ function AuthProvider({ children }) {
   const [authedUser, setAuthedUser] = useState(null);
   const [initializing, setInitializing] = useState(true);
 
-  useEffect(() => {
-    const fetchUser = async () => {
+ useEffect(() => {
+  const fetchUser = async () => {
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+      putAccessToken(token); // ⬅️ WAJIB agar fetchWithToken() menyisipkan Authorization
       const { data, error } = await getUserLogged();
       if (!error) {
         setAuthedUser(data);
       }
-      setInitializing(false);
-    };
+    }
+    setInitializing(false);
+  };
 
-    fetchUser();
-  }, []);
+  fetchUser();
+}, []);
+
+
 
   const loginSuccess = async (accessToken) => {
     putAccessToken(accessToken);
